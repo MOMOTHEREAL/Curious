@@ -4,6 +4,7 @@ import ca.momoperes.curious.game.World;
 import ca.momoperes.curious.ui.GameFrame;
 import ca.momoperes.curious.ui.GameRender;
 import ca.momoperes.curious.ui.RenderThread;
+import ca.momoperes.curious.ui.Textures;
 
 import java.awt.*;
 
@@ -13,6 +14,7 @@ public class Curious {
     private GameRender render;
     private World world;
     private Point camera;
+    public double rotateAngle;
 
     public boolean KEY_W,KEY_A,KEY_S,KEY_D;
 
@@ -25,6 +27,10 @@ public class Curious {
         this.world = new World();
         instance = this;
 
+        Textures.load("Light.png");
+        Textures.load("LightBeam.png");
+
+        new RotateThread(this).start();
         new RenderThread().start();
         new MovementThread().start();
     }
